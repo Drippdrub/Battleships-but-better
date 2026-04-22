@@ -120,7 +120,10 @@ class MenuScreen(Screen):
         frames = self.assets.blast_door_frames
         f = 2
         idx = (t - delay) // f
-        if 0 <= idx < len(frames) and t in range(0, delay + 30):
+        if t < delay:
+            img = widgets.Image(640, 360, frames[0], 1)
+            img.draw(surface)
+        elif 0 <= idx < len(frames) and t in range(0, delay + 30):
             img = widgets.Image(640, 360, frames[int(idx)], 1)
             img.draw(surface)
 

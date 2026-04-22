@@ -1,8 +1,10 @@
 import pygame
-from os.path import join
+from os.path import join, splitext
 from os import walk, scandir
 from utils import resource_path
 from constants import RESOURCE_DIR
+
+VALID_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff', '.webp'}
 
 # code taken from Atlas's video "Efficient imports in pygame", edited for new functionality
 # https://www.youtube.com/watch?v=fFTV6FLPbZo
@@ -16,7 +18,7 @@ def import_image(*path, alpha=True, format='png'):
 def import_image_folder(*path):
     frames = []
     for folder_path, sub_folders, images in walk(join(*path)):
-        for image in sorted(images, key = lambda name: int(name.split('.')[0])):
+        for image in sorted([i for i in images if splitext(i)[1].lower() in VALID_EXTENSIONS], key = lambda name: int(name.split('.')[0])):
             full_path = resource_path(join(folder_path, image))
             surf = pygame.image.load(full_path).convert_alpha()
             frames.append(surf)
@@ -25,7 +27,7 @@ def import_image_folder(*path):
 def import_image_folder_dict(*path):
     frames = {}
     for folder_path, sub_folders, images in walk(join(*path)):
-        for image in images:
+        for image in [i for i in images if splitext(i)[1].lower() in VALID_EXTENSIONS]:
             full_path = resource_path(join(folder_path, image))
             surf = pygame.image.load(full_path).convert_alpha()
             frames[image.split('.')[0]] = surf

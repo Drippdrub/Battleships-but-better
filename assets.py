@@ -211,14 +211,14 @@ class Assets:
         # ── blast door animation ───────────────────────────────────────────
         # expects files named 1.png through 8.png inside the folder... 
         # but your files are named blast_door1.png etc, so load individually
-        self.blast_door_frames = import_image_folder("resources", "images", "Anims", "Blast Door")
+        self.blast_door_frames = import_image_folder("resources", "images", "blast door")
 
         # ── explosion animation ───────────────────────────────────────────
         # files are named 1.png through 12.png so import_image_folder works
-        self.explosion_frames = import_image_folder("resources", "images", "Anims", "Explosion")
+        self.explosion_frames = import_image_folder("resources", "images", "Explosion")
 
         # ── splash animation ──────────────────────────────────────────────
-        self.splash_frames = import_image_folder("resources", "images", "Anims", "Splash")
+        self.splash_frames = import_image_folder("resources", "images", "Splash")
     
     def _load_sounds(self):
         # sfx imports

@@ -6,6 +6,7 @@ from constants import *
 
 from game_state import GameState
 from screens.menu import MenuScreen
+from screens.psw import PSWScreen
 
 pygame.init()
 # randomised window caption
@@ -22,7 +23,7 @@ state = GameState()
 
 screens = {
     "main": MenuScreen(assets, state),
-    "PSW": None
+    "PSW": PSWScreen(assets, state)
 }
 
 FPS = 30
@@ -35,10 +36,6 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
-    
-    # skip PSW for now
-    if state.screen == "PSW":
-        state.screen = "main"
 
     current = screens.get(state.screen)
     if current:
